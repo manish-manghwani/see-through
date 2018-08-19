@@ -1,2 +1,4 @@
 node_modules
 keys.js
+#ignore my VSCode Workspace Settings
+.vscode/
