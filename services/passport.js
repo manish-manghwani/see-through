@@ -19,18 +19,26 @@ passport.use(
     new GoogleStategy({
         clientID : keys.googleClientID,
         clientSecret : keys.googleClientSecret,
-        callbackURL : 'http://localhost:5000/auth/google/callback',
-    },(accessToken , refreshToken , profile, cb) => {
+        callbackURL : 'http://localhost:5000/auth/google/callback'
+    },(accessToken , refreshToken , profile, cb, done) => {
+
+        console.log('accessToken',accessToken);
+        console.log('refreshToken',refreshToken);
+        console.log('profile',profile);
+        console.log('cb',cb);
         
         User.findOne({googleID : profile.id}).then(existingUser => {
             if(existingUser){
-                done(null,existingUser);
-                console.log(googleID);
+                console.log(existingUser);
+                console.log('User Exist');
+                return done(null,existingUser);
             }else{
                 new User({googleID : profile.id}).save()
-                .then(user => done(null,user));
+                .then((user) => {
+                    console.log('New User Added');
+                    return done(null,user);
+                })
             }
         })
     })
 );
-
