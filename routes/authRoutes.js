@@ -8,10 +8,10 @@ module.exports = (app)=>{
     // );
 
     app.get('/auth/google/callback', 
-    passport.authenticate('google', { failureRedirect: '/?fail' }),
+    passport.authenticate('google'),
     function(req, res) {
         // Successful authentication, redirect home.
-        res.redirect('/');
+        res.redirect('/surveys');
     });
 
     app.get('/auth/google/get',

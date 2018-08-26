@@ -23,14 +23,14 @@ passport.use(
         proxy : true
     },(accessToken , refreshToken , profile, cb, done) => {
 
-        console.log('accessToken',accessToken);
-        console.log('refreshToken',refreshToken);
+        // console.log('accessToken',accessToken);
+        // console.log('refreshToken',refreshToken);
         console.log('profile',profile);
         console.log('cb',cb);
         
         User.findOne({googleID : profile.id}).then(existingUser => {
             if(existingUser){
-                console.log(existingUser);
+                // console.log(existingUser);
                 console.log('User Exist');
                 return done(null,existingUser);
             }else{
